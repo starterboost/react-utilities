@@ -5,10 +5,31 @@
   "author": "Jimib",
   "license": "MIT",
   "scripts": {
-    "release": "project-release"
+    "release": "project-release",
+    "test:arrays": "mocha tests/arrays/**/*"
   },
   "devDependencies": {
-    "@starterboost/project-scripts": "starterboost/project-scripts#1.0.5"
+    "@babel/core": "^7.4.4",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@starterboost/project-scripts": "starterboost/project-scripts#1.0.5",
+    "mocha": "^6.1.4"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "mocha": {
+    "diff": true,
+    "extension": [
+      "js"
+    ],
+    "package": "./package.json",
+    "reporter": "spec",
+    "slow": 75,
+    "timeout": 2000,
+    "watch": true,
+    "ui": "bdd",
+    "require": [
+      "@babel/polyfill",
+      "@babel/register"
+    ]
+  }
 }
