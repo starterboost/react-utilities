@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Jimib",
   "license": "MIT",
+  "scripts" : {
+    "release" : "project-release"
+  },
   "devDependencies": {
     "@starterboost/project-scripts": "starterboost/project-scripts#1.0.1"
   },
