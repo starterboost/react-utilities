@@ -21,8 +21,9 @@ ArrayMapper.prototype.update = function( items ){
 
 	let itemsOld = _.clone( this.items );
 	//receives a list of items - we compare to the previous list of items to determine which have been added and removed
-	_.each( items, itemNew => {
-		const itemOld = _.includes( this.items, ( item ) => {
+	_.each( items, (itemNew, index) => {
+		//check if we have an old instance of the variable
+		const itemOld = _.find( this.items, ( item ) => {
 			return this.isMatch( itemNew, item );
 		});
 
@@ -37,8 +38,9 @@ ArrayMapper.prototype.update = function( items ){
 	});
 
 	//identify items that were not covere in the first loop
-	_.each( itemsOld, this.onRemove );
+	_.each( itemsOld, ( itemOld ) => this.onRemove( itemOld ) );
 
 	//record the items we've used to update
-	this.items = items;
+	//NOTE: clone incase items are altered externally
+	this.items = _.clone( items );
 }
