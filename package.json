@@ -8,10 +8,7 @@
     "release": "project-release"
   },
   "devDependencies": {
-    "@starterboost/project-scripts": "starterboost/project-scripts#1.0.1"
+    "@starterboost/project-scripts": "starterboost/project-scripts#1.0.3"
   },
-  "dependencies": {
-    "add": "^2.0.6",
-    "yarn": "^1.15.2"
-  }
+  "dependencies": {}
 }
