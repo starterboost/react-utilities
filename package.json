@@ -1,0 +1,14 @@
+{
+  "name": "@starterboost/react-utilities",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jimib",
+  "license": "MIT",
+  "devDependencies": {
+    "@starterboost/project-scripts": "starterboost/project-scripts#1.0.1"
+  },
+  "dependencies": {
+    "add": "^2.0.6",
+    "yarn": "^1.15.2"
+  }
+}
