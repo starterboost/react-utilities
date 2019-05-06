@@ -1,1 +1,1 @@
-export {default as styles} from './lib/styles';
+export {default as utilsStyles} from './styles';
