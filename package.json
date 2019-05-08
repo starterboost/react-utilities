@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "release": "project-release",
-    "test:timers": "mocha tests/timers/**/*",
-    "test:styles": "mocha tests/styles/**/*"
+    "test:timers": "NODE_ENV=test mocha tests/timers/**/*",
+    "test:styles": "NODE_ENV=test mocha tests/styles/**/*"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
