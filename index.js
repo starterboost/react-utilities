@@ -1,8 +1,8 @@
-import * as arrays from './arrays';
 import * as styles from './styles';
+import * as timers from './timers';
 
-export default {styles};
+export default {styles,timers};
 export {
 	styles as utilStyles,
-	arrays as utilArrays,
+	timers as utilTimers,
 };
