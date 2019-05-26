@@ -1,4 +1,5 @@
 const path = require('path');
+const _ = require('lodash');
 
 const loaderNameMatches = function(rule, loaderName) {
 	return rule && rule.loader && typeof rule.loader === 'string' &&
@@ -20,13 +21,14 @@ const getLoader = function(rules, matcher) {
 };
 
 module.exports = function( options ){
-	const {extname,loader} = options;
+	const {extname,loader,loaderOptions} = options;
 
 	console.assert( extname, 'options.extname required' );
 	console.assert( loader, 'options.loader required' );
 
 	return {
 		overrideWebpackConfig: ({ webpackConfig }) => {
+		  const styleModuleExtension = new RegExp(`(\.module|Component)\.${extname}$`);
 		  const styleExtension = new RegExp(`\.${extname}$`);
 	
 		  const fileLoader = getLoader(
@@ -36,30 +38,48 @@ module.exports = function( options ){
 		  fileLoader.exclude.push(styleExtension);
 	
 		  const rules = {
-			oneOf: [{
-			  test: styleExtension,
-			  use: [
-				{
-					loader: require.resolve('style-loader')
-				}, 
-				{
-					loader: 'css-loader',
-					options : {
-						importLoaders : 1,
-						modules : true,
-						localIdentName : '[name]_[local]_[hash:base64:5]'
+				oneOf: [
+					{
+						test: styleModuleExtension,
+						use: [
+						{
+							loader: require.resolve('style-loader')
+						}, 
+						{
+							loader: 'css-loader',
+							options : _.merge({
+								importLoaders : 1,
+								modules : true,
+								localIdentName : '[name]_[local]_[hash:base64:5]'
+							}, loaderOptions )
+						}, 
+						{
+							loader: require.resolve( loader ),
+						}
+						]
+					},
+					{
+						test: styleExtension,
+						use: [
+						{
+							loader: require.resolve('style-loader')
+						}, 
+						{
+							//no module options
+							loader: 'css-loader'
+						}, 
+						{
+							loader: require.resolve( loader ),
+						}
+						]
 					}
-				}, 
-				{
-					loader: require.resolve( loader ),
-				}
-			  ]
-			}]
-		  }
+				]
+		  };
 		
 		  const oneOfRule = webpackConfig.module.rules.find(rule => (
-			typeof rule.oneOf !== 'undefined'
-		  ));
+				typeof rule.oneOf !== 'undefined'
+			));
+			
 		  const appendTo = oneOfRule ? oneOfRule.oneOf : webpackConfig.module.rules;
 		  appendTo.push(rules);
 	
