@@ -1,6 +1,3 @@
-import style from './style';
-
-export default {style};
-export {
-	style
+module.exports = {
+	style : require('./style')
 };
