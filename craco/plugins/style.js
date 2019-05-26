@@ -41,10 +41,17 @@ module.exports = function( options ){
 			  use: [
 				{
 					loader: require.resolve('style-loader')
-				}, {
-					loader: require.resolve('css-loader'),
-				}, {
-					loader: require.resolve( loader )
+				}, 
+				{
+					loader: 'css-loader',
+					options : {
+						importLoaders : 1,
+						modules : true,
+						localIdentName : '[name]_[local]_[hash:base64:5]'
+					}
+				}, 
+				{
+					loader: require.resolve( loader ),
 				}
 			  ]
 			}]
