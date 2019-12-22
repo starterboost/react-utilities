@@ -49,8 +49,9 @@ module.exports = function( options ){
 							loader: 'css-loader',
 							options : _.merge({
 								importLoaders : 1,
-								modules : true,
-								localIdentName : '[name]_[local]_[hash:base64:5]'
+								modules : {
+									localIdentName : '[name]_[local]_[hash:base64:5]'
+								}
 							}, loaderOptions )
 						}, 
 						{
