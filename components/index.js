@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
+import _ from 'lodash-es';
 
 //pass an array of class names, this will filter out null values and turn into a single string
 class UtilComponent extends Component{
